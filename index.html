@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fizz Buzz</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2821/2821793.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./style.css">
+  <script src="app.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(103deg, #141e30 12%, #243b55 80%);
+      font-family: 'Raleway', sans-serif;
+    }
+
+
+    .wrapper {
+      width: fit-content;
+      text-align: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 16px;
+      flex-direction: column;
+
+    }
+
+    .row_1 {
+      display: flex;
+      gap: 16px;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .row_1 button {
+      background-color: transparent;
+      border-radius: 7px;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      text-shadow: 1px 6px 0px rgb(0 0 0 / 20%);
+    }
+
+    #previous_button {
+      visibility: hidden;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+      font-size: 70px;
+
+    }
+
+    .material-icons.md-light {
+      color: #e6e6e6;
+    }
+
+    #main_display {
+
+      font-family: 'Raleway', sans-serif;
+      border: 1px solid black;
+      background: white;
+      border-radius: 7px;
+      font-size: xx-large;
+      height: 95px;
+      width: 95px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      outline: 2px solid teal;
+      margin: 0;
+    }
+
+    img {
+      height: inherit;
+      width: inherit;
+      border-radius: inherit;
+    }
+
+
+    .anim {
+      animation: blinkingBackground 0.6s infinite !important;
+    }
+
+    @keyframes blinkingBackground {
+      0% {
+        background-color: #00ff0d;
+      }
+
+      50% {
+        background-color: #fff;
+      }
+
+      50% {
+        background-color: #00ff0d;
+      }
+
+      75% {
+        background-color: #fff;
+      }
+
+      100% {
+        background-color: #00ff0d;
+      }
+    }
+
+
+    .row_2 button,
+    .row_3 button {
+      height: 23px;
+      border-radius: 3px;
+      border: none;
+      background-color: transparent;
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .row_3 {
+      display: flex;
+      gap: 0px;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+
+    #number_input {
+      height: 20px;
+      width: 50px;
+      border-radius: 3px;
+      border: 1px solid #ffffff99;
+      text-align: center;
+      color: white;
+      background-color: transparent;
+    }
+
+    input:focus-visible {
+      outline: #c0c0c000 auto 0.5px;
+      outline-offset: 0px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      appearance: none;
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      text-align: center;
+    }
+    a:-webkit-any-link {
+    color: white;
+    }
+
+    #footer-button {
+      color: red;
+      font-size: x-large;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      cursor: default;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="wrapper" id="wrapper">
+
+    <div class="row_1" id="row_1">
+
+      <button id="previous_button" onclick="prev_number()">
+        <span class="material-symbols-outlined material-icons md-light">
+          chevron_left
+        </span>
+      </button>
+
+      <div id="main_display">1</div>
+
+
+      <button id="next_button" onclick="next_number()">
+        <span class="material-symbols-outlined material-icons md-light">
+          chevron_right
+        </span>
+      </button>
+    </div>
+
+    <div class="row_2" id="row_2">
+      <button onclick="showChooseNumber()">Choose a number</button>
+    </div>
+
+
+    <div class="row_3" id="row_3">
+
+      <input type="number" id="number_input">
+      <button id="number_input_button" onclick="inputNumber()">GO</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      <a href="https://github.com/pinir12/fizz-buzz" target="_blank"> ZR</a>
+      <span id="hearts">
+        <button id="footer-button" onclick="hearts()">
+           &hearts;
+      </span>
+      </button>
+    </p>
+  </div>
+</body>
+<script>
+  var number = 1
+  console.log(number)
+
+  function prev_number() {
+    if (number > 1) {
+      number--;
+      main()
+    }
+  }
+
+
+  function next_number() {
+    if (number < 99999) {
+      number++
+      main();
+    }
+  }
+
+
+  function main() {
+    number = Math.floor(number)
+    var x = number % 3;
+    var y = number % 5;
+    var messageA = "FIZZ"
+    var messageB = "BUZZ"
+
+    hideShowButtons()
+
+    if (number == 150) {
+      document.getElementById("main_display").innerHTML = "<img src='https://thorpedigital.co.uk/fizz/yellow_car.avif' alt='yellow_car'>";
+      document.getElementById("car").style.display = "block";
+    }
+    else if (x == 0 && y == 0) {
+      console.log(number + "-" + messageA + " " + messageB);
+      document.getElementById("main_display").innerHTML = messageA + " " + messageB;
+      document.getElementById("main_display").style.color = "black";
+      document.getElementById("main_display").classList.add("anim");
+    } else if (x == 0) {
+      console.log(number + "-" + messageA);
+      document.getElementById("main_display").innerHTML = messageA;
+      document.getElementById("main_display").style.color = "#00ff0d";
+      document.getElementById("main_display").classList.remove("anim");
+    } else if (y == 0) {
+      console.log(number + "-" + messageB);
+      document.getElementById("main_display").innerHTML = messageB;
+      document.getElementById("main_display").style.color = "#00ff0d";
+      document.getElementById("main_display").classList.remove("anim");
+    } else {
+      console.log(number);
+      document.getElementById("main_display").innerHTML = number;
+      document.getElementById("main_display").style.color = "black";
+      document.getElementById("main_display").classList.remove("anim");
+    }
+  }
+
+  function hideShowButtons() {
+    if (number <= 1) {
+      document.getElementById("previous_button").style.visibility = "hidden";
+      document.getElementById("next_button").style.visibility = "visible";
+    }
+    else if (number >= 99999) {
+      document.getElementById("next_button").style.visibility = "hidden";
+      document.getElementById("previous_button").style.visibility = "visible";
+    }
+    else {
+      document.getElementById("previous_button").style.visibility = "visible";
+      document.getElementById("next_button").style.visibility = "visible";
+    }
+  }
+
+
+  function inputNumber() {
+    var numberInput = document.getElementById("number_input").value
+    if (numberInput > 99999) {
+      number = 99999
+    }
+    // if I use numberInput < 1 for this else if, any input or empty input becomes 1
+    // < 0 works, no idea why it's better
+    //but like thi enables user to input 0, I don't want that
+    else if (numberInput < 0) {
+      number = 1
+    } else if (numberInput.length == 0) {
+      clearInput()
+    }
+    else {
+      number = numberInput;
+    }
+    hideChooseNumber()
+    main()
+  }
+
+
+
+  function showChooseNumber() {
+    document.getElementById("row_2").style.display = "none";
+    document.getElementById("row_3").style.display = "flex";
+    document.getElementById("number_input").focus();
+    listenEnter()
+  }
+
+  function listenEnter() {
+    var inputButtonEvent = document.getElementById("number_input");
+    inputButtonEvent.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        document.getElementById("number_input_button").click();
+      }
+    });
+  }
+
+
+  function hideChooseNumber() {
+    document.getElementById("row_2").style.display = "block";
+    document.getElementById("row_3").style.display = "none";
+    clearInput()
+
+  }
+
+  function clearInput() {
+    var getValue = document.getElementById("number_input");
+    if (getValue.value != "") {
+      getValue.value = "";
+    }
+  }
+
+
+  window.onload = function () {
+    document.onkeydown = function (event) {
+      switch (event.keyCode) {
+        case 37:
+          prev_number()
+          break;
+        case 39:
+          next_number()
+          break;
+        case 40:
+          showChooseNumber()
+          break;
+      }
+    };
+  }
+
+  function hearts() {
+    number = 150
+    main()
+  }
+</script>
+
+
+<script>
+  /*!
+   * swiped-events.js - v1.1.6
+   * Pure JavaScript swipe events
+   * https://github.com/john-doherty/swiped-events
+   * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+   * @author John Doherty <www.johndoherty.info>
+   * @license MIT*/
+  !function (t, e) { "use strict"; "function" != typeof t.CustomEvent && (t.CustomEvent = function (t, n) { n = n || { bubbles: !1, cancelable: !1, detail: void 0 }; var a = e.createEvent("CustomEvent"); return a.initCustomEvent(t, n.bubbles, n.cancelable, n.detail), a }, t.CustomEvent.prototype = t.Event.prototype), e.addEventListener("touchstart", function (t) { if ("true" === t.target.getAttribute("data-swipe-ignore")) return; s = t.target, r = Date.now(), n = t.touches[0].clientX, a = t.touches[0].clientY, u = 0, i = 0 }, !1), e.addEventListener("touchmove", function (t) { if (!n || !a) return; var e = t.touches[0].clientX, r = t.touches[0].clientY; u = n - e, i = a - r }, !1), e.addEventListener("touchend", function (t) { if (s !== t.target) return; var e = parseInt(l(s, "data-swipe-threshold", "20"), 10), o = parseInt(l(s, "data-swipe-timeout", "500"), 10), c = Date.now() - r, d = "", p = t.changedTouches || t.touches || []; Math.abs(u) > Math.abs(i) ? Math.abs(u) > e && c < o && (d = u > 0 ? "swiped-left" : "swiped-right") : Math.abs(i) > e && c < o && (d = i > 0 ? "swiped-up" : "swiped-down"); if ("" !== d) { var b = { dir: d.replace(/swiped-/, ""), touchType: (p[0] || {}).touchType || "direct", xStart: parseInt(n, 10), xEnd: parseInt((p[0] || {}).clientX || -1, 10), yStart: parseInt(a, 10), yEnd: parseInt((p[0] || {}).clientY || -1, 10) }; s.dispatchEvent(new CustomEvent("swiped", { bubbles: !0, cancelable: !0, detail: b })), s.dispatchEvent(new CustomEvent(d, { bubbles: !0, cancelable: !0, detail: b })) } n = null, a = null, r = null }, !1); var n = null, a = null, u = null, i = null, r = null, s = null; function l(t, n, a) { for (; t && t !== e.documentElement;) { var u = t.getAttribute(n); if (u) return u; t = t.parentNode } return a } }(window, document);
+
+
+  document.getElementById("wrapper").addEventListener('swiped-right', function (e) {
+    prev_number()
+  });
+
+  document.getElementById("wrapper").addEventListener('swiped-left', function (e) {
+    next_number()
+  });
+
+
+</script>
+
+</html>
